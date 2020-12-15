@@ -1,4 +1,4 @@
-package com.javarush.task.task30.task3008;
+package task3008;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -7,14 +7,13 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
-    private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
+    private static final Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
     public static void sendBroadcastMessage(Message message) {
         for (Connection connection : connectionMap.values()) {
             try {
                 connection.send(message);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 ConsoleHelper.writeMessage("Не смогли отправить сообщение " + connection.getRemoteSocketAddress());
             }
         }
@@ -37,7 +36,7 @@ public class Server {
     }
 
     private static class Handler extends Thread {
-        private Socket socket;
+        private final Socket socket;
 
         public Handler(Socket socket) {
             this.socket = socket;
@@ -89,6 +88,7 @@ public class Server {
                 return userName;
             }
         }
+
         private void notifyUsers(Connection connection, String userName) throws IOException {
             for (String name : connectionMap.keySet()) {
                 if (!name.equals(userName)) {
@@ -96,14 +96,14 @@ public class Server {
                 }
             }
         }
+
         private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException {
             while (true) {
                 Message message = connection.receive();
                 if (message != null) {
                     if (message.getType() == MessageType.TEXT) {
                         sendBroadcastMessage(new Message(MessageType.TEXT, userName + ": " + message.getData()));
-                    }
-                    else
+                    } else
                         ConsoleHelper.writeMessage("Получено сообщение от " + socket.getRemoteSocketAddress() + ". Тип сообщения не соответствует протоколу.");
                 }
 

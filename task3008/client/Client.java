@@ -1,10 +1,12 @@
-package com.javarush.task.task30.task3008.client;
+package task3008.client;
 
-import com.javarush.task.task30.task3008.*;
+import task3008.Connection;
+import task3008.ConsoleHelper;
+import task3008.Message;
+import task3008.MessageType;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class Client {
     protected Connection connection;

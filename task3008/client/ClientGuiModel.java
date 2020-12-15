@@ -1,6 +1,5 @@
-package com.javarush.task.task30.task3008.client;
+package task3008.client;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 

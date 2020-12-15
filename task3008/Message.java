@@ -1,4 +1,4 @@
-package com.javarush.task.task30.task3008;
+package task3008;
 
 
 import java.io.Serializable;

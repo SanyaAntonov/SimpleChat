@@ -1,11 +1,11 @@
-package com.javarush.task.task30.task3008;
+package task3008;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ConsoleHelper {
-    private static BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
+    private static final BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
 
     public static void writeMessage(String message) {
         System.out.println(message);
